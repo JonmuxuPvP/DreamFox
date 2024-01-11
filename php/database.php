@@ -42,13 +42,19 @@
 			return $pdo;
 		}
 
-		public function query($query) 
+		public function query($query, $all) 
 		{
 			$statement = $query;
 			$preparedStatement = $this->pdo->prepare($statement);
 			$preparedStatement->execute();
 
-			return $preparedStatement;
+			$data;
+			if ($all) {
+				$data = $preparedStatement->fetchAll(PDO::FETCH_ASSOC);
+			} else {
+				$data = $preparedStatement->fetch(PDO::FETCH_ASSOC);
+			}
+			return $data;
 		}
 
 		/**
@@ -60,14 +66,5 @@
 			$this->pdo = null;
 		}
 
-		public function test() 
-		{
-			$statement = "SELECT * FROM user WHERE username = 'Jonmuxu'";
-			$stmt = $this->pdo->prepare($statement);
-			$stmt->execute();
-
-			$row = $stmt->fetch();
-			echo var_dump($row);
-		}
 	}
 ?>
