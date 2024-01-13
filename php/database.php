@@ -42,19 +42,12 @@
 			return $pdo;
 		}
 
-		public function query($query, $all) 
+		public function query($statement) 
 		{
-			$statement = $query;
 			$preparedStatement = $this->pdo->prepare($statement);
 			$preparedStatement->execute();
 
-			$data;
-			if ($all) {
-				$data = $preparedStatement->fetchAll(PDO::FETCH_ASSOC);
-			} else {
-				$data = $preparedStatement->fetch(PDO::FETCH_ASSOC);
-			}
-			return $data;
+			return $preparedStatement;
 		}
 
 		/**
