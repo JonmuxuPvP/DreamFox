@@ -8,19 +8,25 @@
     $username = $_GET["username"];
 
     $statement = "SELECT id FROM user WHERE username = '$username'";
-    $result = $database->query($statement, false);
-    $id = $result["id"];
+    $preparedStatement = $database->query($statement);
 
-    $statement = "SELECT a.id, a.title, a.content, a.is_lucid, a.date FROM dream as A INNER JOIN user as B ON (A.user_id = B.id) WHERE b.id = " . $id;
+    $result = $preparedStatement->fetch(PDO::FETCH_ASSOC);
 
-    $dreams = $database->query($statement, true); 
+    if ($result) {
+        $id = $result["id"];
+        $statement = "SELECT title, content, is_lucid, date FROM dream WHERE user_id = '$id'";
+        $preparedStatement = $database->query($statement);
 
-    $dreamsArray = new Dreams();
-    foreach ($dreams as $dream) {
-        $test = new Dream($dream["id"], $dream["title"], $dream["content"], $dream["is_lucid"], $dream["date"]); 
-        $dreamsArray->add($test);
+        $preparedStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Dream", array("title", "content", "is_lucid", "date"));
+        $dreams = new Dreams();
+        while ($row = $preparedStatement->fetch()) {
+        $dreams->add($row);
+        }
+
+        $response = new Response($dreams);
+        $response->send();
+    } else {
+        echo '{"error": "invalid user id"}';
     }
 
-    $response = new Response($dreamsArray);
-    $response->send();
 ?>

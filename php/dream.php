@@ -1,15 +1,13 @@
 <?php
     class Dream 
     {
-        private $id;
         private $title;
         private $content;
         private $is_lucid;
         private $date;
 
-        public function __construct($id, $title, $content, $is_lucid, $date)
+        public function __construct($title, $content, $is_lucid, $date)
         {
-            $this->id = $id;
             $this->title = $title;
             $this->content = $content;
             $this->is_lucid = $is_lucid;
