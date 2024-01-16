@@ -16,10 +16,14 @@
 
         public function toArray()
 		{
-			$data = array();
-			foreach ($this as $key => $value) {
-                $data[$key] = $value;
-			}
+            $data = array();
+            foreach ($this as $key => $value) {
+                if ($key === "is_lucid") {
+                    $data["isLucid"] = $value;
+                } else {
+                    $data[$key] = $value;
+                }
+            }
 			return $data;
 		}
     }
