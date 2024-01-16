@@ -29,7 +29,7 @@
 			<br>
 
 			<label for="lucid">Lucid</label>
-			<input type="checkbox" id="lucid" name="lucid">
+			<input type="checkbox" id="lucid" name="is_lucid">
 
 			<br>
 

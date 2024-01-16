@@ -18,11 +18,11 @@
             if ($password === $_POST["password"]) {
                 $title = $_POST["title"];
                 $content = $_POST["content"];
-                $is_lucid = isset($_POST["is_lucid"]);
+                $is_lucid = isset($_POST["is_lucid"]) ? 'TRUE' : 'FALSE';
 
                 $content = escapeCharacters($content);
 
-                $statement = "INSERT INTO dream (title, content, is_lucid, user_id) VALUES ('$title', '$content', '$is_lucid', $id)";
+                $statement = "INSERT INTO dream (title, content, is_lucid, user_id) VALUES ('$title', '$content', $is_lucid, $id)";
                 $preparedStatement = $database->query($statement);
             } else {
                 echo '{"error": "Invalid password"}';
