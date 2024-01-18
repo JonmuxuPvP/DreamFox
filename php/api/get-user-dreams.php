@@ -14,7 +14,7 @@
 
         if ($result) {
             $id = $result["id"];
-            $statement = "SELECT title, content, is_lucid, date FROM dream WHERE user_id = '$id'";
+            $statement = "SELECT id, title, content, is_lucid, date FROM dream WHERE user_id = '$id'";
             $preparedStatement = $database->query($statement);
             $dreams = parseDreams($preparedStatement); 
 
@@ -26,7 +26,7 @@
     }
 
     function parseDreams($preparedStatement) {
-        $preparedStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Dream", array("title", "content", "is_lucid", "date"));
+        $preparedStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Dream", array("id", "title", "content", "is_lucid", "date"));
         $dreams = new Dreams();
 
         while ($row = $preparedStatement->fetch()) {
