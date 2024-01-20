@@ -1,6 +1,5 @@
 <?php
     include "../database.php";
-    include "../response.php";
 
     $database = new Database();
 
