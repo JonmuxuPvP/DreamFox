@@ -25,6 +25,8 @@
         }
     }
 
+    $database->close();
+
     function parseDreams($preparedStatement) {
         $preparedStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Dream", array("id", "title", "content", "is_lucid", "date"));
         $dreams = new Dreams();

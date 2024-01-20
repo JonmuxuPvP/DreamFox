@@ -24,6 +24,8 @@
         }
     }
 
+    $database->close();
+
     function checkParameters() {
         return isset($_GET["id"]) && 
                isset($_GET["title"]) && 

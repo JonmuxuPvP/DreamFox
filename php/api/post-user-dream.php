@@ -36,6 +36,8 @@
         echo '{"error": "Invalid/missing parameters"}';
     }
 
+    $database->close();
+
     function checkParameters() {
         return isset($_POST["username"]) && 
                isset($_POST["password"]) && 

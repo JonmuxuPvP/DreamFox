@@ -18,6 +18,8 @@
         }
     }
 
+    $database->close();
+
     function deleted($preparedStatement) {
         return $preparedStatement->rowCount() >= 1;
     }
