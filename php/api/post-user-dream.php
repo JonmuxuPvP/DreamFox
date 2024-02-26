@@ -24,7 +24,6 @@
 
                 $statement = "INSERT INTO dream (title, content, is_lucid, user_id) VALUES ('$title', '$content', $is_lucid, $id)";
                 $preparedStatement = $database->query($statement);
-                echo '{"OK": "The dream has been submitted"}';
             } else {
                 echo '{"error": "Invalid password"}';
             }
